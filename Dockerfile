@@ -15,6 +15,7 @@ RUN useradd -r -g dirac -u 50000 -c "dirac service account" \
 RUN echo “Installing DIRAC”
 ADD ./FakeSiteDirector.cfg /srv/dirac/FakeSiteDirector.cfg
 ADD ./my_install_dirac.sh /srv/dirac/my_install_dirac.sh
+ADD ./condor.patch /tmp/condor.patch
 RUN mkdir -p /opt/dirac; \
     chown -R belle.belle /opt/dirac; \
     mkdir -p /srv/dirac; \
@@ -23,7 +24,9 @@ RUN mkdir -p /opt/dirac; \
     wget -O dirac-install 'https://github.com/DIRACGrid/DIRAC/raw/integration/Core/scripts/dirac-install.py' || exit ;\
     chmod +x dirac-install; \
     chmod +x /srv/dirac/my_install_dirac.sh; \
-    ./my_install_dirac.sh;
+    ./my_install_dirac.sh; \
+    cd /; patch -p0 < /tmp/condor.patch; \
+    rm -f /tmp/condor.patch
 
 # Add the setup scripts to finish install/cfg DIRAC using docker_compose
 ADD ./final_install.sh /opt/dirac/sbin/final_install.sh

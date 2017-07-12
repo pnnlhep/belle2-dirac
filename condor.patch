@@ -1,0 +1,12 @@
+--- /opt/dirac/pro/DIRAC/Resources/Computing/BatchSystems/Condor.py.orig      2017-07-12 20:33:29.338910579 +0000
++++ /opt/dirac/pro/DIRAC/Resources/Computing/BatchSystems/Condor.py  2017-07-12 20:11:15.955691630 +0000
+@@ -100,7 +100,7 @@
+     
+     jdlFile.flush()
+     
+-    status,output = commands.getstatusoutput( 'condor_submit %s %s' % ( submitOptions, jdlFile.name ) )
++    status,output = commands.getstatusoutput( 'env -u DIRAC condor_submit %s %s' % ( submitOptions, jdlFile.name ) )
+     
+     jdlFile.close()
+     
+
