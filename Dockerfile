@@ -29,7 +29,6 @@ RUN mkdir -p /opt/dirac; \
 ADD ./final_install.sh /opt/dirac/sbin/final_install.sh
 ## Belle 2 hack 
 ADD ./LocalComputingElement-v6r17.py /opt/dirac/pro/DIRAC/Resources/Computing/LocalComputingElement.py
-ADD ./Condor-v6r17.py /opt/dirac/pro/DIRAC/Resources/Computing/BatchSystems/Condor.py
 ADD ./SiteDirector-v6r17.py /opt/dirac/pro/DIRAC/WorkloadManagementSystem/Agent/SiteDirector.py
 
 
